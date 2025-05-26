@@ -19,13 +19,13 @@
       "problemMatcher": []
     },
     {
-      "label": "Kill .NET Processes",
+      "label": "Kill: .NET Processes",
       "type": "shell",
       "command": "Get-Process | Where-Object { $_.ProcessName -like '*dotnet*' } | Stop-Process",
       "problemMatcher": []
     },
     {
-      "label": "Lint Frontend",
+      "label": "Lint: Frontend",
       "type": "npm",
       "script": "lint",
       "options": {
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "label": "Lint Backend",
+      "label": "Lint: Backend",
       "type": "shell",
       "command": "dotnet",
       "args": [
@@ -53,11 +53,11 @@
       ]
     },
     {
-      "label": "Lint All",
+      "label": "Lint: All",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "Lint Frontend",
-        "Lint Backend"
+        "Lint: Frontend",
+        "Lint: Backend"
       ],
       "problemMatcher": [
         "$eslint-stylish",
@@ -65,7 +65,7 @@
       ]
     },
     {
-      "label": "Format Frontend",
+      "label": "Format: Frontend",
       "type": "npm",
       "script": "format",
       "options": {
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "label": "Format Backend",
+      "label": "Format: Backend",
       "type": "shell",
       "command": "dotnet",
       "args": [
@@ -90,11 +90,11 @@
       ]
     },
     {
-      "label": "Format All",
+      "label": "Format: All",
       "dependsOrder": "sequence",
       "dependsOn": [
-        "Format Frontend",
-        "Format Backend"
+        "Format: Frontend",
+        "Format: Backend"
       ],
       "problemMatcher": [
         "$eslint-stylish",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "label": "build",
+      "label": "Build: Backend",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -114,7 +114,7 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "publish",
+      "label": "Publish: Backend",
       "command": "dotnet",
       "type": "process",
       "args": [
@@ -126,7 +126,7 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "watch",
+      "label": "Watch: Backend",
       "command": "dotnet",
       "type": "process",
       "args": [
