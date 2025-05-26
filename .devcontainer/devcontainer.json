@@ -1,0 +1,78 @@
+{
+  "name": "media-pilot-dev",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {}
+  },
+  "remoteEnv": {
+    "PODMAN_USERNS": "keep-id"
+  },
+  "postCreateCommand": "postCreateCommand",
+  "mounts": [
+    {
+      "source": "/var/run/docker.sock",
+      "target": "/var/run/docker.sock",
+      "type": "bind"
+    },
+    {
+      "source": "${localEnv:HOME}/.gitconfig",
+      "target": "/root/.gitconfig",
+      "type": "bind"
+    }
+  ],
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "files.autoSave": "onFocusChange",
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+          {
+            "column": 100
+          }
+        ],
+        "editor.tabSize": 2,
+        "search.exclude": {
+          "**/node_modules": true,
+          "**/bower_components": true,
+          "**/*.code-search": true,
+          "**/bin": true,
+          "**/obj": true
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "adrianwilczynski.csharp-to-typescript",
+        "ban.spellright",
+        "bradlc.vscode-tailwindcss",
+        "DavidAnson.vscode-markdownlint",
+        "dbaeumer.vscode-eslint",
+        "docker.docker",
+        "eamodio.gitlens",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "foxundermoon.shell-format",
+        "GitHub.vscode-pull-request-github",
+        "GraphQL.vscode-graphql-syntax",
+        "GraphQL.vscode-graphql",
+        "hediet.vscode-drawio",
+        "lunuan.kubernetes-templates",
+        "mads-hartmann.bash-ide-vscode",
+        "ms-azuretools.vscode-containers",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csharp",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode-remote.remote-containers",
+        "ms-vsliveshare.vsliveshare",
+        "nopeslide.vscode-drawio-plugin-mermaid",
+        "redhat.vscode-xml",
+        "redhat.vscode-yaml",
+        "SimonSiefke.svg-preview",
+        "streetsidesoftware.code-spell-checker",
+        "Tim-Koehler.helm-intellisense",
+        "Vue.volar",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  }
+}
