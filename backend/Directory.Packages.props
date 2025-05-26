@@ -1,0 +1,10 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="HotChocolate.AspNetCore" Version="15.1.5" />
+    <PackageVersion Include="HotChocolate.Data" Version="15.1.5" />
+    <PackageVersion Include="HotChocolate.Diagnostics" Version="15.1.5" />
+  </ItemGroup>
+</Project>

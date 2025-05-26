@@ -1,0 +1,167 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker: Build Dev Image",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "build",
+        "-f",
+        "./docker/development/Dockerfile",
+        "-t",
+        "dev/sld-data",
+        "."
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Kill: .NET Processes",
+      "type": "shell",
+      "command": "Get-Process | Where-Object { $_.ProcessName -like '*dotnet*' } | Stop-Process",
+      "problemMatcher": []
+    },
+    {
+      "label": "Lint: Frontend",
+      "type": "npm",
+      "script": "lint",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "label": "Lint: Backend",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "format",
+        "-v",
+        "d",
+        "--verify-no-changes"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "Lint: All",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Lint: Frontend",
+        "Lint: Backend"
+      ],
+      "problemMatcher": [
+        "$eslint-stylish",
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "Format: Frontend",
+      "type": "npm",
+      "script": "format",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "problemMatcher": [
+        "$eslint-stylish"
+      ]
+    },
+    {
+      "label": "Format: Backend",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "format"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "Format: All",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Format: Frontend",
+        "Format: Backend"
+      ],
+      "problemMatcher": [
+        "$eslint-stylish",
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "Build: Backend",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/backend/MediaPilot.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Publish: Backend",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/backend/MediaPilot.sln",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary;ForceNoAlign"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Watch: Backend",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "watch",
+        "run",
+        "--project",
+        "${workspaceFolder}/backend/MediaPilot.sln"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Add EF Migration",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "ef",
+        "migrations",
+        "add",
+        "-s",
+        "MediaPilot.Server",
+        "-p",
+        "MediaPilot.Data",
+        "${input:migrationsName}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": "$msCompile"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "migrationsName",
+      "type": "promptString",
+      "description": "Enter the migration name:"
+    }
+  ]
+}
